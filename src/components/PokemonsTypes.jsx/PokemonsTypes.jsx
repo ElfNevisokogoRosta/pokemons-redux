@@ -7,7 +7,7 @@ import useLocalStorage from 'components/services/useLocalStorage';
 import { Pokemon } from 'components/Pokemon/Pokemon';
 
 export const PokemonsTypes = () => {
-  const [typesPokemons, setTypesPokemons] = useLocalStorage('local-poke', []);
+  const [typesPokemons, setTypesPokemons] = useLocalStorage('typed-poke', []);
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
   const type = useSelector(state => state.type.type);
@@ -20,11 +20,11 @@ export const PokemonsTypes = () => {
       {loading ? (
         <Circles />
       ) : (
-        <ul>
+        <ul className="poke-list">
           {pokemons?.map((pokemon, index) => {
             return (
-              <li key={`${pokemon.name}+${index}`}>
-                <Pokemon url={pokemon.url} />
+              <li key={`${pokemon.pokemon.name}+${index}`}>
+                <Pokemon url={pokemon.pokemon.url} />
               </li>
             );
           })}

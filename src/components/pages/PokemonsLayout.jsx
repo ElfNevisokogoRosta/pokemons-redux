@@ -15,7 +15,7 @@ import { useTypeData } from '../services/useTypeData';
 export const PokemonsLayout = () => {
   const perPage = useSelector(state => state.perPage.value);
   const type = useSelector(state => state.type.type);
-  console.log(type);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handlePageChange = e => {
@@ -23,12 +23,12 @@ export const PokemonsLayout = () => {
     dispatch(resetPage());
     dispatch(perPageChange(newValue));
   };
-  console.log(type);
+
   const handleTypeChange = e => {
     dispatch(resetPage());
     const type = e.target.value;
     dispatch(pokeTypeSet(type));
-    navigate(`/types/${type}`);
+    navigate(`/${type}`);
   };
 
   const [loading, error, types] = useTypeData();
@@ -69,14 +69,6 @@ export const PokemonsLayout = () => {
         }}
       >
         next page
-      </button>
-      <button
-        onClick={() => {
-          const randomNum = Math.floor(Math.random() * 10);
-          navigate(`/test/${randomNum}-text`);
-        }}
-      >
-        Redirect on random page
       </button>
     </>
   );

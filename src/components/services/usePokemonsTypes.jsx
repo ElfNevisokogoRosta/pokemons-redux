@@ -9,17 +9,23 @@ export const usePokemonsTypes = type => {
   useEffect(() => {
     setLoading(true);
     if (type === null) {
+      setLoading(false);
+      return;
+    }
+    if (typedPoke.length > 1) {
+      setLoading(false);
       return;
     }
     axios
       .get(`https://pokeapi.co/api/v2/type/${type}`)
       .then(res => {
         setLoading(false);
-        console.log(res.data);
+
         setTypedPoke(res.data.pokemon);
       })
       .catch(e => {
         setError(e);
+        setLoading(false);
       });
   }, []);
   return [loading, error, typedPoke];

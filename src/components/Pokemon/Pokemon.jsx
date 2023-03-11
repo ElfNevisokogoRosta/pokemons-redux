@@ -5,7 +5,6 @@ import { Circles } from 'react-loader-spinner';
 
 export const Pokemon = ({ url }) => {
   const [loading, error, pokeData] = usePokemonData(url);
-
   return (
     <>
       {loading ? (
