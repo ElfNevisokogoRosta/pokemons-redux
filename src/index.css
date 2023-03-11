@@ -13,3 +13,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.poke-list{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.type-list{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

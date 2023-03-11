@@ -1,32 +1,32 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import usePokemonLoad from 'components/services/usePokemonLoad';
 import { Circles } from 'react-loader-spinner';
-import { useSelector, useDispatch } from 'react-redux';
-import { nextPage } from 'redux/reducer';
+import { useSelector } from 'react-redux';
+import useLocalStorage from 'components/services/useLocalStorage';
+import { Pokemon } from 'components/Pokemon/Pokemon';
+import { useTypeData } from 'components/services/useTypeData';
 export const Pokemons = () => {
-  const page = useSelector(state => state.page);
-  const dispatch = useDispatch();
-  const [loading, error, data] = usePokemonLoad();
+  const [pokemons, setPokemons] = useLocalStorage('local-poke', []);
+  const page = useSelector(state => state.page.page);
+  const perPage = useSelector(state => state.perPage.perPage);
+  const type = useSelector(state => state.type.type);
+  const [loading, error] = usePokemonLoad();
+  const pokeNumber = Number(page) * perPage;
+  const [typeloading, typeerror, types] = useTypeData();
   return (
     <>
       {loading ? (
         <Circles />
       ) : (
-        data.slice(0, 10 * page).map((pokemon, index) => {
+        pokemons?.slice(0, pokeNumber).map((pokemon, index) => {
           return (
             <li key={`${pokemon.name}+${index}`}>
-              {pokemon.name}+{pokemon.url}
+              <Pokemon url={pokemon.url} />
             </li>
           );
         })
       )}
-      <button
-        onClick={() => {
-          dispatch(nextPage);
-        }}
-      >
-        next page
-      </button>
     </>
   );
 };

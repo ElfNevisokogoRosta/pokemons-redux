@@ -22,6 +22,7 @@ const usePokemonLoad = () => {
         setError(e);
         setLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return [loading, error, localData];
 };
