@@ -8,14 +8,6 @@ export const usePokemonsTypes = type => {
   const [typedPoke, setTypedPoke] = useLocalStorage('typed-poke', []);
   useEffect(() => {
     setLoading(true);
-    if (type === null) {
-      setLoading(false);
-      return;
-    }
-    if (typedPoke.length > 1) {
-      setLoading(false);
-      return;
-    }
     axios
       .get(`https://pokeapi.co/api/v2/type/${type}`)
       .then(res => {

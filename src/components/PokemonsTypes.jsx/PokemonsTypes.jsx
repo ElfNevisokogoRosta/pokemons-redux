@@ -5,12 +5,14 @@ import { Circles } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
 import useLocalStorage from 'components/services/useLocalStorage';
 import { Pokemon } from 'components/Pokemon/Pokemon';
+import { useParams } from 'react-router-dom';
 
 export const PokemonsTypes = () => {
   const [typesPokemons, setTypesPokemons] = useLocalStorage('typed-poke', []);
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
   const type = useSelector(state => state.type.type);
+  const params = useParams();
   const [loading, error] = usePokemonsTypes(type);
   const pokeNumber = Number(page) * perPage;
   const pokemons = typesPokemons?.slice(0, pokeNumber);
