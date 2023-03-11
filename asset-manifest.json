@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pokemons-redux/static/css/main.b0264399.css",
+    "main.js": "/pokemons-redux/static/js/main.1944394b.js",
+    "index.html": "/pokemons-redux/index.html",
+    "main.b0264399.css.map": "/pokemons-redux/static/css/main.b0264399.css.map",
+    "main.1944394b.js.map": "/pokemons-redux/static/js/main.1944394b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0264399.css",
+    "static/js/main.1944394b.js"
+  ]
+}
