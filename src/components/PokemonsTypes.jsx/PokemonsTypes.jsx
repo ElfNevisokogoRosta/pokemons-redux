@@ -1,24 +1,26 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import usePokemonLoad from 'components/services/usePokemonLoad';
+import { usePokemonsTypes } from 'components/services/usePokemonsTypes';
 import { Circles } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
 import useLocalStorage from 'components/services/useLocalStorage';
 import { Pokemon } from 'components/Pokemon/Pokemon';
 
-export const Pokemons = () => {
-  const [localPokemons, setlocalPokemons] = useLocalStorage('local-poke', []);
+export const PokemonsTypes = () => {
+  const [typesPokemons, setTypesPokemons] = useLocalStorage('local-poke', []);
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
-  const [loading, error] = usePokemonLoad();
+  const type = useSelector(state => state.type.type);
+  const [loading, error] = usePokemonsTypes(type);
   const pokeNumber = Number(page) * perPage;
-  const pokemons = localPokemons?.slice(0, pokeNumber);
+  const pokemons = typesPokemons?.slice(0, pokeNumber);
+
   return (
     <>
       {loading ? (
         <Circles />
       ) : (
-        <ul className="poke-list">
+        <ul>
           {pokemons?.map((pokemon, index) => {
             return (
               <li key={`${pokemon.name}+${index}`}>
