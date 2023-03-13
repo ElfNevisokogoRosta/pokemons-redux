@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
 import { usePokemonsTypes } from 'components/services/usePokemonsTypes';
 import { Circles } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
 import useLocalStorage from 'components/services/useLocalStorage';
 import { Pokemon } from 'components/Pokemon/Pokemon';
-import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export const PokemonsTypes = () => {
-  const [typesPokemons, setTypesPokemons] = useLocalStorage('typed-poke', []);
+const PokemonsTypes = ({ type }) => {
+  const [typesPokemons, setTypesPokemonsLocally] = useLocalStorage(
+    'typed-poke',
+    []
+  );
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
-  const type = useSelector(state => state.type.type);
-  const params = useParams();
-  const [loading, error] = usePokemonsTypes(type);
+
+  const [loading, error, data] = usePokemonsTypes(type);
   const pokeNumber = Number(page) * perPage;
   const pokemons = typesPokemons?.slice(0, pokeNumber);
 
@@ -35,3 +36,10 @@ export const PokemonsTypes = () => {
     </>
   );
 };
+
+const pokeStateToProps = state => {
+  return {
+    type: state.type.type,
+  };
+};
+export default connect(pokeStateToProps)(PokemonsTypes);

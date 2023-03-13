@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { PokemonsLayout } from './pages/PokemonsLayout';
 import { Pokemons } from './Pokemons/Pokemons';
-import { PokemonsTypes } from './PokemonsTypes.jsx/PokemonsTypes';
+import PokemonsTypes from './PokemonsTypes.jsx/PokemonsTypes';
 
 export const App = () => {
   return (
