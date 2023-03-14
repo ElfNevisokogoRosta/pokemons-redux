@@ -1,5 +1,5 @@
 import { Pokemon } from 'components/Pokemon/Pokemon';
-import { usePokemonSearch } from 'components/services/usePokemonSearch';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';

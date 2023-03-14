@@ -5,6 +5,7 @@ import { useTypeData } from '../services/useTypeData';
 import { useSelector, useDispatch } from 'react-redux';
 import { perPageChange, pokeTypeSet, resetPage } from 'redux/reducer';
 export const Navigation = () => {
+  // eslint-disable-next-line no-unused-vars
   const [loading, error, types] = useTypeData();
   const perPage = useSelector(state => state.perPage.perPage);
   const dispatch = useDispatch();

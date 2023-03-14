@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Circles } from 'react-loader-spinner';
 import { usePokemonsTypes } from 'components/services/usePokemonsTypes';
@@ -14,14 +15,41 @@ export const PokemonsTypes = () => {
 
   const pokeNumber = Number(page) * perPage;
   const [loading, error, data] = usePokemonsTypes(type);
-  const setPokeNumber = number => {
-    dispatch(setPokeTypeNumber(number));
-  };
-  setPokeNumber(data.length);
+
+  useEffect(() => {
+    dispatch(setPokeTypeNumber(data.length));
+  });
   const pokemons = data?.slice(0, pokeNumber);
   const navigate = useNavigate();
   if (error) {
-    return <div>Something went wrong</div>;
+    return (
+      <div>
+        <button
+          onClick={() => {
+            dispatch(resetPage());
+            navigate(`/`);
+          }}
+        >
+          Home
+        </button>
+        Something went wrong
+      </div>
+    );
+  }
+  if (data.length === 0) {
+    return (
+      <>
+        <button
+          onClick={() => {
+            dispatch(resetPage());
+            navigate(`/`);
+          }}
+        >
+          Home
+        </button>
+        <p>No data for this type</p>
+      </>
+    );
   }
 
   return (
