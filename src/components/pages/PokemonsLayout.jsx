@@ -1,75 +1,36 @@
 /* eslint-disable no-unused-vars */
-import { Circles } from 'react-loader-spinner';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import {
-  perPageChange,
-  nextPage,
-  pokeTypeSet,
-  resetPage,
-} from '../../redux/reducer';
-import { useNavigate } from 'react-router-dom';
-import { usePokemonsTypes } from '../services/usePokemonsTypes';
-import { useTypeData } from '../services/useTypeData';
+import { nextPage } from '../../redux/reducer';
+import { useParams } from 'react-router-dom';
+import { Navigation } from 'components/Navigation/Navigation';
+import { SearchBar } from 'components/SearchBar/SearchBar';
 
 export const PokemonsLayout = () => {
-  const perPage = useSelector(state => state.perPage.value);
-  const type = useSelector(state => state.type.type);
-
+  const perPage = useSelector(state => state.perPage.perPage);
+  const page = useSelector(state => state.page.page);
+  const typeNumber = useSelector(state => state.typeNumber.typeNumber);
+  const total = useSelector(state => state.total.total);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handlePageChange = e => {
-    const newValue = Number(e.target.value);
-    dispatch(resetPage());
-    dispatch(perPageChange(newValue));
+
+  const params = useParams();
+  const handleNextPageClick = () => {
+    dispatch(nextPage());
   };
-
-  const handleTypeChange = e => {
-    dispatch(resetPage());
-    const type = e.target.value;
-    dispatch(pokeTypeSet(type));
-    navigate(`/${type}`);
-  };
-
-  const [loading, error, types] = useTypeData();
-  usePokemonsTypes(type);
-
+  const hasMore = total > perPage * page;
+  const hasMoreType = typeNumber > perPage * page;
   return (
     <>
-      <select value={perPage} onChange={handlePageChange}>
-        <option value={10}>10</option>
-        <option value={20}>20</option>
-        <option value={50}>50</option>
-      </select>
-      {loading ? (
-        <Circles />
-      ) : (
-        <form>
-          {types?.map((type, index) => {
-            return (
-              <label key={`${type.name}-${index}`}>
-                {' '}
-                {type.name}{' '}
-                <input
-                  type="radio"
-                  name="type"
-                  value={type.name}
-                  onClick={handleTypeChange}
-                />
-              </label>
-            );
-          })}
-        </form>
-      )}
-
+      <Navigation />
+      <SearchBar />
       <Outlet />
-      <button
-        onClick={() => {
-          dispatch(nextPage());
-        }}
-      >
-        next page
-      </button>
+
+      {params.type === '' && hasMore && (
+        <button onClick={handleNextPageClick}>Next page</button>
+      )}
+      {params.type !== '' && hasMoreType && (
+        <button onClick={handleNextPageClick}>Next page</button>
+      )}
     </>
   );
 };

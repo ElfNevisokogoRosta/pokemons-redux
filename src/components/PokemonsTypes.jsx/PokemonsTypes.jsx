@@ -1,45 +1,54 @@
-/* eslint-disable no-unused-vars */
-import { usePokemonsTypes } from 'components/services/usePokemonsTypes';
+import { useDispatch, useSelector } from 'react-redux';
 import { Circles } from 'react-loader-spinner';
-import { useSelector } from 'react-redux';
-import useLocalStorage from 'components/services/useLocalStorage';
+import { usePokemonsTypes } from 'components/services/usePokemonsTypes';
 import { Pokemon } from 'components/Pokemon/Pokemon';
-import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { resetPage } from 'redux/reducer';
+import { setPokeTypeNumber } from 'redux/reducer';
 
-const PokemonsTypes = ({ type }) => {
-  const [typesPokemons, setTypesPokemonsLocally] = useLocalStorage(
-    'typed-poke',
-    []
-  );
+export const PokemonsTypes = () => {
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
+  const type = useSelector(state => state.type.type);
+  const dispatch = useDispatch();
 
-  const [loading, error, data] = usePokemonsTypes(type);
   const pokeNumber = Number(page) * perPage;
-  const pokemons = typesPokemons?.slice(0, pokeNumber);
+  const [loading, error, data] = usePokemonsTypes(type);
+  const setPokeNumber = number => {
+    dispatch(setPokeTypeNumber(number));
+  };
+  setPokeNumber(data.length);
+  const pokemons = data?.slice(0, pokeNumber);
+  const navigate = useNavigate();
+  if (error) {
+    return <div>Something went wrong</div>;
+  }
 
   return (
     <>
       {loading ? (
         <Circles />
       ) : (
-        <ul className="poke-list">
-          {pokemons?.map((pokemon, index) => {
-            return (
-              <li key={`${pokemon.pokemon.name}+${index}`}>
-                <Pokemon url={pokemon.pokemon.url} />
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          <button
+            onClick={() => {
+              dispatch(resetPage());
+              navigate(`/`);
+            }}
+          >
+            Home
+          </button>
+          <ul className="poke-list">
+            {pokemons?.map((pokemon, index) => {
+              return (
+                <li key={`${pokemon.pokemon.name}+${index}`}>
+                  <Pokemon url={pokemon.pokemon.url} />
+                </li>
+              );
+            })}
+          </ul>
+        </>
       )}
     </>
   );
 };
-
-const pokeStateToProps = state => {
-  return {
-    type: state.type.type,
-  };
-};
-export default connect(pokeStateToProps)(PokemonsTypes);

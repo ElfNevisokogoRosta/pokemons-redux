@@ -7,12 +7,11 @@ import useLocalStorage from 'components/services/useLocalStorage';
 import { Pokemon } from 'components/Pokemon/Pokemon';
 
 export const Pokemons = () => {
-  const [localPokemons, setlocalPokemons] = useLocalStorage('local-poke', []);
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
-  const [loading, error] = usePokemonLoad();
+  const [loading, error, data] = usePokemonLoad();
   const pokeNumber = Number(page) * perPage;
-  const pokemons = localPokemons?.slice(0, pokeNumber);
+  const pokemons = data?.slice(0, pokeNumber);
   return (
     <>
       {loading ? (

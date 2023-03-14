@@ -6,7 +6,9 @@ const usePokemonData = url => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [pokeData, setPokeData] = useState({});
+
   useEffect(() => {
+    setError(false);
     setLoading(true);
     axios
       .get(url)
@@ -20,8 +22,11 @@ const usePokemonData = url => {
 
         setLoading(false);
       })
-      .catch(e => setError(setError(e)));
-  }, []);
+      .catch(e => {
+        setLoading(false);
+        setError(e);
+      });
+  }, [url]);
   return [loading, error, pokeData];
 };
 export default usePokemonData;
