@@ -25,7 +25,7 @@ export const PokemonsLayout = () => {
       <SearchBar />
       <Outlet />
 
-      {params.type === '' && hasMore && (
+      {params.type === undefined && hasMore && (
         <button onClick={handleNextPageClick}>Next page</button>
       )}
       {params.type !== '' && hasMoreType && (

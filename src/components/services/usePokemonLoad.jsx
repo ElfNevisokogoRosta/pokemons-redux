@@ -11,6 +11,7 @@ const usePokemonLoad = () => {
   useEffect(() => {
     setLoading(true);
     if (localData.length > 0) {
+      console.log(localData.length);
       dispatch(setTotalPoke(localData.length));
       setLoading(false);
       return;
