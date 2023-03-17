@@ -6,7 +6,8 @@ import { Pokemon } from 'components/Pokemon/Pokemon';
 import { useNavigate } from 'react-router-dom';
 import { resetPage } from 'redux/reducer';
 import { setPokeTypeNumber } from 'redux/reducer';
-
+import { List } from '../Pokemons/Pokemons.styled';
+import { HomeBtn } from './PokemonsTypes.styled';
 export const PokemonsTypes = () => {
   const page = useSelector(state => state.page.page);
   const perPage = useSelector(state => state.perPage.perPage);
@@ -24,14 +25,14 @@ export const PokemonsTypes = () => {
   if (error) {
     return (
       <div>
-        <button
+        <HomeBtn
           onClick={() => {
             dispatch(resetPage());
             navigate(`/`);
           }}
         >
           Home
-        </button>
+        </HomeBtn>
         Something went wrong
       </div>
     );
@@ -39,14 +40,14 @@ export const PokemonsTypes = () => {
   if (data.length === 0) {
     return (
       <>
-        <button
+        <HomeBtn
           onClick={() => {
             dispatch(resetPage());
             navigate(`/`);
           }}
         >
           Home
-        </button>
+        </HomeBtn>
         <p>No data for this type</p>
       </>
     );
@@ -58,15 +59,15 @@ export const PokemonsTypes = () => {
         <Circles />
       ) : (
         <>
-          <button
+          <HomeBtn
             onClick={() => {
               dispatch(resetPage());
               navigate(`/`);
             }}
           >
             Home
-          </button>
-          <ul className="poke-list">
+          </HomeBtn>
+          <List className="poke-list">
             {pokemons?.map((pokemon, index) => {
               return (
                 <li key={`${pokemon.pokemon.name}+${index}`}>
@@ -74,7 +75,7 @@ export const PokemonsTypes = () => {
                 </li>
               );
             })}
-          </ul>
+          </List>
         </>
       )}
     </>

@@ -2,7 +2,17 @@
 import usePokemonData from 'components/services/usePokemonData';
 import React from 'react';
 import { Circles } from 'react-loader-spinner';
-
+import {
+  Container,
+  Tittle,
+  FontImage,
+  TypeList,
+  StatsList,
+  StatElement,
+  StatName,
+  StateValue,
+} from './Pokemon.styled';
+import { PokemonTypeCard } from 'components/PokemonCard/PokemonTypeCard';
 export const Pokemon = ({ url }) => {
   const [loading, error, pokeData] = usePokemonData(url);
   if (error) {
@@ -13,30 +23,25 @@ export const Pokemon = ({ url }) => {
       {loading ? (
         <Circles />
       ) : (
-        <div>
-          <h2>{pokeData.name}</h2>
-          <img src={pokeData.image} alt="" />
-          <ul>
+        <Container>
+          <Tittle>{pokeData.name}</Tittle>
+          <FontImage src={pokeData.image} alt="" />
+          <TypeList>
             {pokeData.types?.map((type, index) => {
-              return (
-                <li key={`${type.type.name}+${index}`}>
-                  <h3>{type.type.name}</h3>
-                </li>
-              );
+              return <PokemonTypeCard type={type} index={index} />;
             })}
-          </ul>
-          <ul className="type-list">
+          </TypeList>
+          <StatsList>
             {pokeData.stats?.map((stat, index) => {
               return (
-                <li key={`${stat.stat.name}-${index}`}>
-                  <p>
-                    {stat.stat.name}: {stat.base_stat}
-                  </p>
-                </li>
+                <StatElement key={`${stat.stat.name}-${index}`}>
+                  <StatName>{stat.stat.name}</StatName>{' '}
+                  <StateValue>{stat.base_stat}</StateValue>
+                </StatElement>
               );
             })}
-          </ul>
-        </div>
+          </StatsList>
+        </Container>
       )}
     </>
   );

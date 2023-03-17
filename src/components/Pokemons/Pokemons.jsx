@@ -3,8 +3,8 @@ import React from 'react';
 import usePokemonLoad from 'components/services/usePokemonLoad';
 import { Circles } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
-import useLocalStorage from 'components/services/useLocalStorage';
 import { Pokemon } from 'components/Pokemon/Pokemon';
+import { List } from './Pokemons.styled';
 
 export const Pokemons = () => {
   const page = useSelector(state => state.page.page);
@@ -17,7 +17,7 @@ export const Pokemons = () => {
       {loading ? (
         <Circles />
       ) : (
-        <ul className="poke-list">
+        <List className="poke-list">
           {pokemons?.map((pokemon, index) => {
             return (
               <li key={`${pokemon.name}+${index}`}>
@@ -25,7 +25,7 @@ export const Pokemons = () => {
               </li>
             );
           })}
-        </ul>
+        </List>
       )}
     </>
   );

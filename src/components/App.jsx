@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { PokemonsLayout } from './pages/PokemonsLayout';
 import { Pokemons } from './Pokemons/Pokemons';
-import { PokemonsTypes } from './PokemonsTypes.jsx/PokemonsTypes';
-import { SearchResults } from './SearchResults.jsx/SearchResults';
+import { PokemonsTypes } from './PokemonsTypes/PokemonsTypes';
+import { SearchResults } from './SearchResults/SearchResults';
 export const App = () => {
   return (
     <Routes>

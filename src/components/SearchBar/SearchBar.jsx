@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { FormContainer, SearchField, SearchBtn } from './SearchBar.styled';
 export const SearchBar = () => {
   const navigate = useNavigate();
   return (
@@ -9,11 +9,16 @@ export const SearchBar = () => {
         action=""
         onSubmit={e => {
           e.preventDefault();
-          navigate(`/search/${e.target.q.value}`);
+          console.log(e.target.q.value);
+          if (e.target.q.value !== '') {
+            navigate(`/search/${e.target.q.value}`);
+          }
         }}
       >
-        <input type="text" name="q" />
-        <button>Search</button>
+        <FormContainer>
+          <SearchField type="text" name="q" placeholder="Enter pokemon name" />
+          <SearchBtn>Search</SearchBtn>
+        </FormContainer>
       </form>
     </>
   );

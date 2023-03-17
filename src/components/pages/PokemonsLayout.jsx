@@ -5,7 +5,7 @@ import { nextPage } from '../../redux/reducer';
 import { useParams } from 'react-router-dom';
 import { Navigation } from 'components/Navigation/Navigation';
 import { SearchBar } from 'components/SearchBar/SearchBar';
-
+import { NextPageBtn } from './PokemonsLayout.styled';
 export const PokemonsLayout = () => {
   const perPage = useSelector(state => state.perPage.perPage);
   const page = useSelector(state => state.page.page);
@@ -26,10 +26,10 @@ export const PokemonsLayout = () => {
       <Outlet />
 
       {params.type === undefined && hasMore && (
-        <button onClick={handleNextPageClick}>Next page</button>
+        <NextPageBtn onClick={handleNextPageClick}>Next page</NextPageBtn>
       )}
-      {params.type !== '' && hasMoreType && (
-        <button onClick={handleNextPageClick}>Next page</button>
+      {params.type !== undefined && hasMoreType && (
+        <NextPageBtn onClick={handleNextPageClick}>Next page</NextPageBtn>
       )}
     </>
   );

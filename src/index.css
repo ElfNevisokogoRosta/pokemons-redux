@@ -13,9 +13,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#root{
+  max-width: 1200px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px; 
+}
 .poke-list{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
 }
 .type-list{
   display: grid;
