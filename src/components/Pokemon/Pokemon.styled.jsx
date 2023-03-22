@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+  position: relative;
   border-radius: 6px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #f7e8c1;
+
+  z-index: 1;
 `;
 const Tittle = styled.h2`
   width: 100%;
@@ -53,45 +55,54 @@ const TypeElements = styled.li`
   ${props => {
     switch (props.children?.props.children) {
       case 'normal':
-        return `background-color: #A8A878;`;
+        return `background-color: #919AA2;`;
       case 'fire':
-        return `background-color: #F08030;`;
+        return `background-color: #FF9D55;`;
       case 'water':
-        return `background-color: #6890F0;`;
+        return `background-color: #5090D6;`;
       case 'grass':
-        return `background-color: #78C850;`;
+        return `background-color: #63BC5A;`;
       case 'electric':
-        return `background-color: #F8D030;`;
+        return `background-color: #F4D23C;`;
       case 'ice':
-        return `background-color: #98D8D8;`;
+        return `background-color: #73CEC0;`;
       case 'fighting':
-        return `background-color: #C03028;`;
+        return `background-color: #CE416B;`;
       case 'poison':
-        return `background-color: #A040A0;`;
+        return `background-color: #B567CE;`;
       case 'ground':
-        return `background-color: #E0C068;`;
+        return `background-color: #D97845;`;
       case 'flying':
-        return `background-color: #A890F0;`;
+        return `background-color: #89AAE3;`;
       case 'psychic':
-        return `background-color: #F85888;`;
+        return `background-color: #FA7179;`;
       case 'bug':
-        return `background-color: #A8B820;`;
+        return `background-color: #91C12F;`;
       case 'rock':
-        return `background-color: #B8A038;`;
+        return `background-color: #C5B78C;`;
       case 'ghost':
-        return `background-color: #705898;`;
+        return `background-color: #5269AD;`;
       case 'dragon':
-        return `background-color: #7038F8;`;
+        return `background-color: #0B6DC3;`;
       case 'dark':
-        return `background-color: #705848;`;
+        return `background-color: #5A5465;`;
       case 'steel':
-        return `background-color: #B8B8D0;`;
+        return `background-color: #5A8EA2;`;
       case 'fairy':
-        return `background-color: #EE99AC;`;
+        return `background-color: #EC8FE6;`;
       default:
         return `background-color: #BFBFBF;`;
     }
   }}
+`;
+
+const Background = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  fill: #bfbfbf;
+  z-index: -1;
 `;
 export {
   Container,
@@ -103,4 +114,5 @@ export {
   StatElement,
   StatName,
   StateValue,
+  Background,
 };

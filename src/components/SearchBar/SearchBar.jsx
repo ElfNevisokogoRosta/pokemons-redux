@@ -9,7 +9,6 @@ export const SearchBar = () => {
         action=""
         onSubmit={e => {
           e.preventDefault();
-          console.log(e.target.q.value);
           if (e.target.q.value !== '') {
             navigate(`/search/${e.target.q.value}`);
           }

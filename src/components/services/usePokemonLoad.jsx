@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useLocalStorage from './useLocalStorage';
-import { setTotalPoke } from 'redux/reducer';
+import { setTotalNumber } from 'redux/reducer';
 const usePokemonLoad = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -11,8 +11,7 @@ const usePokemonLoad = () => {
   useEffect(() => {
     setLoading(true);
     if (localData.length > 0) {
-      console.log(localData.length);
-      dispatch(setTotalPoke(localData.length));
+      dispatch(setTotalNumber(localData.length));
       setLoading(false);
       return;
     }
@@ -20,7 +19,7 @@ const usePokemonLoad = () => {
       .get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
       .then(res => {
         const totalNumber = res.data.results.length;
-        dispatch(setTotalPoke(totalNumber));
+        dispatch(setTotalNumber(totalNumber));
         setLocalData([...res.data.results]);
         setLoading(false);
       })

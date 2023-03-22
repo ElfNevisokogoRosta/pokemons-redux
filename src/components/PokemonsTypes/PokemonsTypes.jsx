@@ -3,22 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Circles } from 'react-loader-spinner';
 import { usePokemonsTypes } from 'components/services/usePokemonsTypes';
 import { Pokemon } from 'components/Pokemon/Pokemon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { resetPage } from 'redux/reducer';
-import { setPokeTypeNumber } from 'redux/reducer';
+import { setTypeNumber } from 'redux/reducer';
 import { List } from '../Pokemons/Pokemons.styled';
 import { HomeBtn } from './PokemonsTypes.styled';
 export const PokemonsTypes = () => {
-  const page = useSelector(state => state.page.page);
-  const perPage = useSelector(state => state.perPage.perPage);
-  const type = useSelector(state => state.type.type);
+  //inital global reducer
+  const params = useParams();
+  const { page, perPage } = useSelector(state => state.pokemon);
   const dispatch = useDispatch();
 
   const pokeNumber = Number(page) * perPage;
-  const [loading, error, data] = usePokemonsTypes(type);
-
+  const [loading, error, data] = usePokemonsTypes(params.type);
+  console.log(params.type);
   useEffect(() => {
-    dispatch(setPokeTypeNumber(data.length));
+    dispatch(setTypeNumber(data.length));
   });
   const pokemons = data?.slice(0, pokeNumber);
   const navigate = useNavigate();

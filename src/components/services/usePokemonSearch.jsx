@@ -6,14 +6,12 @@ export const usePokemonSearch = query => {
   const [error, setError] = useState(false);
   const [data, setData] = useState({});
   useEffect(() => {
-    console.log(query);
     if (query.trim() === '') {
       setError('Enter valid search qury');
     }
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${query}`)
       .then(res => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch(e => {

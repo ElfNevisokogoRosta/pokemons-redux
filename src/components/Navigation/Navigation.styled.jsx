@@ -18,36 +18,16 @@ const Select = styled.select`
   background-repeat: no-repeat;
   background-position: right 10px center;
 `;
-const LabelContainer = styled.div`
-  margin-left: 15px;
+
+const IconContainer = styled.svg`
+  width: 44px;
+  height: 44px;
+  margin-right: 5px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
 `;
-const Input = styled.input`
+const SideBar = styled.nav`
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
+  left: 40px;
+  top: 30px;
 `;
-
-const Label = styled.label`
-  width: 80px;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  background-color: #cadbc0;
-  padding: 5px 5px;
-  border: 1px solid #a27e6f;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
-    background-color: #c94277;
-    color: #ffffff;
-  }
-  &${Input}:checked {
-    background-color: #c94277;
-    color: #ffffff;
-  }
-`;
-
-export { Header, Select, Label, Input, LabelContainer };
+export { Header, Select, IconContainer, SideBar };

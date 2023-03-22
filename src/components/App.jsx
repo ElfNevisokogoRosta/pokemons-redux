@@ -11,7 +11,6 @@ export const App = () => {
         <Route index element={<Pokemons />} />
         <Route path="/:type" element={<PokemonsTypes />} />
         <Route path="/search/:query" element={<SearchResults />} />
-        <Route path="/pokemons-redux" element={<Navigate to="/" />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

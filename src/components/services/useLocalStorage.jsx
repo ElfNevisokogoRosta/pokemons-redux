@@ -5,7 +5,6 @@ const useLocalStorage = (key, initialValue) => {
     const storedValue = window.localStorage.getItem(key);
     return storedValue !== null ? JSON.parse(storedValue) : initialValue;
   });
-
   const setStoredValue = newValue => {
     setValue(newValue);
     window.localStorage.setItem(key, JSON.stringify(newValue));

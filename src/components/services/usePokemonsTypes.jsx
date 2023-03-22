@@ -7,7 +7,6 @@ export const usePokemonsTypes = type => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [typedPoke, setTypedPoke] = useLocalStorage('typed-poke', []);
-
   useEffect(() => {
     setLoading(true);
     if (type === null) {

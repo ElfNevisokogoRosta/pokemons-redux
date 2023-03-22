@@ -1,33 +1,68 @@
 import React from 'react';
 import { Circles } from 'react-loader-spinner';
-import { useNavigate } from 'react-router-dom';
+
 import { useTypeData } from '../services/useTypeData';
 import { useSelector, useDispatch } from 'react-redux';
-import { perPageChange, pokeTypeSet, resetPage } from 'redux/reducer';
-import {
-  Header,
-  Select,
-  Input,
-  Label,
-  LabelContainer,
-} from './Navigation.styled';
+import { setPerPage, resetPage } from 'redux/reducer';
+import { NavLink } from 'react-router-dom';
+import { Header, Select, IconContainer, SideBar } from './Navigation.styled';
+import sprites from '../../styles/sprites.svg';
 
 export const Navigation = () => {
   // eslint-disable-next-line no-unused-vars
   const [loading, error, types] = useTypeData();
-  const perPage = useSelector(state => state.perPage.perPage);
+  const { perPage } = useSelector(state => state.pokemon);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handlePageChange = e => {
     const newValue = Number(e.target.value);
     dispatch(resetPage());
-    dispatch(perPageChange(newValue));
+    dispatch(setPerPage(newValue));
   };
-  const handleTypeChange = e => {
-    dispatch(resetPage());
-    const type = e.target.value;
-    dispatch(pokeTypeSet(type));
-    navigate(`/${type}`);
+
+  const typeIcon = type => {
+    switch (type) {
+      case 'normal':
+        return <use href={`${sprites}#normal`} />;
+      case 'dark':
+        return <use href={`${sprites}#dark`} />;
+      case 'electric':
+        return <use href={`${sprites}#electric`} />;
+      case 'fairy':
+        return <use href={`${sprites}#fairy`} />;
+      case 'fighting':
+        return <use href={`${sprites}#fighting`} />;
+      case 'ground':
+        return <use href={`${sprites}#ground`} />;
+      case 'ice':
+        return <use href={`${sprites}#ice`} />;
+      case 'physic':
+        return <use href={`${sprites}#physic`} />;
+      case 'poison':
+        return <use href={`${sprites}#poison`} />;
+      case 'rock':
+        return <use href={`${sprites}#rock`} />;
+      case 'steel':
+        return <use href={`${sprites}#steel`} />;
+      case 'water':
+        return <use href={`${sprites}#steel`} />;
+      case 'flying':
+        return <use href={`${sprites}#flying`} />;
+      case 'bug':
+        return <use href={`${sprites}#bug`} />;
+      case 'ghost':
+        return <use href={`${sprites}#ghost`} />;
+      case 'fire':
+        return <use href={`${sprites}#fire`} />;
+      case 'grass':
+        return <use href={`${sprites}#grass`} />;
+      case 'psychic':
+        return <use href={`${sprites}#psyhic`} />;
+      case 'dragon':
+        return <use href={`${sprites}#dragon`} />;
+      default:
+        return <use href={`${sprites}#standart`} />;
+    }
   };
   return (
     <Header>
@@ -40,24 +75,16 @@ export const Navigation = () => {
       {loading ? (
         <Circles />
       ) : (
-        <form>
-          <LabelContainer>
-            {types?.map((type, index) => {
-              return (
-                <Label key={`${type.name}-${index}`}>
-                  {' '}
-                  {type.name}{' '}
-                  <Input
-                    type="radio"
-                    name="type"
-                    value={type.name}
-                    onClick={handleTypeChange}
-                  />
-                </Label>
-              );
-            })}
-          </LabelContainer>
-        </form>
+        <SideBar>
+          {types?.map((type, index) => {
+            return (
+              <NavLink className="navLink" to={`/${type.name}`}>
+                <IconContainer>{typeIcon(type.name)}</IconContainer>
+                {type.name}
+              </NavLink>
+            );
+          })}
+        </SideBar>
       )}
     </Header>
   );

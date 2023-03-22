@@ -19,7 +19,6 @@ const usePokemonData = url => {
           types: res.data.types,
           stats: res.data.stats,
         });
-
         setLoading(false);
       })
       .catch(e => {

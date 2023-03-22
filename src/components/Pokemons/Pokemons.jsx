@@ -7,8 +7,7 @@ import { Pokemon } from 'components/Pokemon/Pokemon';
 import { List } from './Pokemons.styled';
 
 export const Pokemons = () => {
-  const page = useSelector(state => state.page.page);
-  const perPage = useSelector(state => state.perPage.perPage);
+  const { page, perPage } = useSelector(state => state.pokemon);
   const [loading, error, data] = usePokemonLoad();
   const pokeNumber = Number(page) * perPage;
   const pokemons = data?.slice(0, pokeNumber);

@@ -1,11 +1,10 @@
 import { Pokemon } from 'components/Pokemon/Pokemon';
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { resetPage } from 'redux/reducer';
-
+import { HomeBtn } from '../PokemonsTypes/PokemonsTypes.styled';
 export const SearchResults = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -14,14 +13,14 @@ export const SearchResults = () => {
 
   return (
     <>
-      <button
+      <HomeBtn
         onClick={() => {
           dispatch(resetPage());
           navigate(`/`);
         }}
       >
         Home
-      </button>
+      </HomeBtn>
       <Pokemon url={url} />
     </>
   );
